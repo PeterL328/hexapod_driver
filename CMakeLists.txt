@@ -112,34 +112,33 @@ catkin_package(
 ## Build ##
 ###########
 
+# Variables
+set(LIBRARY_PATH src/lib)
+
 ## Specify additional locations of header files
 ## Your package locations should be listed before other locations
 include_directories(
 # include
   ${catkin_INCLUDE_DIRS}
-  src/ads7830_driver
+  ${LIBRARY_PATH}
 )
 
 ## Declare a C++ library
 # add_library(${PROJECT_NAME}
 #   src/${PROJECT_NAME}/ads7830.cpp
 # )
-add_library(libads7830 STATIC src/ads7830_driver/ads7830.cpp)
+add_library(libads7830 STATIC ${LIBRARY_PATH}/ads7830.cpp)
 
 ## Add cmake target dependencies of the library
 ## as an example, code may need to be generated before libraries
 ## either from message generation or dynamic reconfigure
 # add_dependencies(${PROJECT_NAME} ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
-add_executable(monitor_battery src/monitor_battery.cpp)
-target_link_libraries(monitor_battery ${catkin_LIBRARIES})
-target_link_libraries(monitor_battery libads7830)
-add_dependencies(monitor_battery ads7830_generate_messages_cpp)
 
 ## Declare a C++ executable
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
 # add_executable(${PROJECT_NAME}_node src/ads7830_node.cpp)
-
+add_executable(monitor_battery src/monitor_battery.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -150,12 +149,14 @@ add_dependencies(monitor_battery ads7830_generate_messages_cpp)
 ## Add cmake target dependencies of the executable
 ## same as for the library above
 # add_dependencies(${PROJECT_NAME}_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+add_dependencies(monitor_battery ads7830_generate_messages_cpp)
 
 ## Specify libraries to link a library or executable target against
 # target_link_libraries(${PROJECT_NAME}_node
 #   ${catkin_LIBRARIES}
 # )
-
+target_link_libraries(monitor_battery ${catkin_LIBRARIES})
+target_link_libraries(monitor_battery libads7830)
 
 #############
 ## Install ##
