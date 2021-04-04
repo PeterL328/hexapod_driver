@@ -49,7 +49,7 @@ find_package(catkin REQUIRED COMPONENTS
 ## Generate messages in the 'msg' folder
 add_message_files(
     FILES
-    Num.msg
+    Battery.msg
 )
 
 ## Generate services in the 'srv' folder
@@ -113,7 +113,11 @@ catkin_package(
 ###########
 
 # Variables
-set(LIBRARY_PATH src/lib)
+set(SRC_DIRS src)
+set(LIBRARY_PATH ${SRC_DIRS}/lib)
+
+file(GLOB_RECURSE SOURCES "${SRC_DIRS}/*.cpp")
+file(GLOB_RECURSE HEADERS "${SRC_DIRS}/*.h")
 
 ## Specify additional locations of header files
 ## Your package locations should be listed before other locations
@@ -138,7 +142,15 @@ add_library(libads7830 STATIC ${LIBRARY_PATH}/ads7830.cpp)
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
 # add_executable(${PROJECT_NAME}_node src/ads7830_node.cpp)
-add_executable(monitor_battery src/monitor_battery.cpp)
+add_executable(monitor_battery ${SOURCES})
+
+foreach (_headerFile ${HEADERS})
+    get_filename_component(_dir ${_headerFile} PATH)
+    list (APPEND SRC_DIRS ${_dir})
+endforeach()
+list(REMOVE_DUPLICATES SRC_DIRS)
+
+target_include_directories(monitor_battery PRIVATE ${SRC_DIRS})
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the

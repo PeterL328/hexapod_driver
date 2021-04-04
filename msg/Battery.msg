@@ -1,0 +1,2 @@
+float32 control_board_battery
+float32 servo_battery
