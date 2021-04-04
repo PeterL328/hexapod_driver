@@ -46,6 +46,8 @@ int main(int argc, char **argv)
 
     ros::Rate loop_rate(10);
 
+    ADS7830::ADS7830 battery_monitor();
+
     /**
      * A count of how many messages we have sent. This is used to create
      * a unique string for each message.
@@ -59,8 +61,8 @@ int main(int argc, char **argv)
         std_msgs::String msg;
 
         std::stringstream ss;
-        std::string str = hello();
-        ss << str << count;
+        float voltage = battery_monitor.read_voltage(0);
+        ss << voltage << " " << count;
         msg.data = ss.str();
 
         ROS_INFO("%s", msg.data.c_str());
