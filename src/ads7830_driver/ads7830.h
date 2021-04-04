@@ -1,6 +1,8 @@
 #ifndef ADS7830_LIBRARY_H
 #define ADS7830_LIBRARY_H
+#include <iostream>
+#include <string>
 
-void hello();
+std::string hello();
 
 #endif //ADS7830_LIBRARY_H
