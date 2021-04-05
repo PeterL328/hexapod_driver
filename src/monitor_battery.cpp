@@ -20,8 +20,7 @@ int main(int argc, char **argv)
     // Battery configuration setup
     const float li_ion_cut_off_v = 3.0f;
     const float li_ion_max_v = 4.2f;
-    Battery::BatteryStatus control_battery_monitor{Battery::BatteryType::CONTROL_BOARD, li_ion_cut_off_v, li_ion_max_v};
-    Battery::BatteryStatus servo_battery_monitor{Battery::BatteryType::SERVO, li_ion_cut_off_v, li_ion_max_v};
+    Battery::BatteryStatus battery_monitor{li_ion_cut_off_v, li_ion_max_v};
 
     while (ros::ok())
     {
@@ -31,8 +30,8 @@ int main(int argc, char **argv)
         ads7830::Battery msg;
 
         // Read battery status
-        msg.control_board_battery = control_battery_monitor.read_battery_percentage();
-        msg.servo_battery = servo_battery_monitor.read_battery_percentage();
+        msg.control_board_battery = battery_monitor.read_battery_percentage(Battery::BatteryType::CONTROL_BOARD);
+        msg.servo_battery = battery_monitor.read_battery_percentage(Battery::BatteryType::SERVO);
 
         /**
          * The publish() function is how you send messages. The parameter

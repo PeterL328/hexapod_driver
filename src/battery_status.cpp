@@ -3,7 +3,7 @@
 #include "battery_status.h"
 
 namespace Battery {
-    BatteryStatus::BatteryStatus(BatteryType battery, float lower_bound, float upper_bound) :
+    BatteryStatus::BatteryStatus(float lower_bound, float upper_bound) :
         lower_bound_(lower_bound), upper_bound_(upper_bound) {
         // Setup the ADS7830 object
         ADS7830_controller = std::make_unique<ADS7830>();
@@ -14,18 +14,18 @@ namespace Battery {
             throw std::runtime_error("Failed to connect to ADS7830 via I2C.");
         }
         ROS_INFO("Successfully connected to ADS7830 via I2C.");
+    }
 
+    float BatteryStatus::read_battery_percentage(BatteryType battery) {
+        int channel = 0;
         if (battery == BatteryType::CONTROL_BOARD) {
-            channel_ = 4;
+            channel = 4;
         } else if (battery == BatteryType::SERVO) {
-            channel_ = 0;
+            channel = 0;
         } else {
             ROS_ERROR("Invalid battery type. ");
             throw std::invalid_argument("Invalid battery type.");
         }
-    }
-
-    float BatteryStatus::read_battery_percentage() {
-        return ADS7830_controller->read_voltage(channel_);
+        return ADS7830_controller->read_voltage(channel);
     }
 }
