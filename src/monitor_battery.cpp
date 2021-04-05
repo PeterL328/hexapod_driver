@@ -1,8 +1,8 @@
 #include <iostream>
 
 #include "ros/ros.h"
-#include "ads7830/Battery.h"
 
+#include "ads7830/Battery.h"
 #include "battery_status.h"
 
 int main(int argc, char **argv)

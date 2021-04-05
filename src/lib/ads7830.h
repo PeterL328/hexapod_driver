@@ -1,9 +1,6 @@
 #ifndef ADS7830_LIBRARY_H
 #define ADS7830_LIBRARY_H
 
-#include <iostream>
-#include <string>
-
 class ADS7830 {
 private:
     int i2c_bus_;
