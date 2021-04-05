@@ -127,11 +127,15 @@ include_directories(
   ${LIBRARY_PATH}
 )
 
+## External C++ library
+find_library(WIRINGPI_LIBRARIES NAMES wiringPi)
+
 ## Declare a C++ library
 # add_library(${PROJECT_NAME}
 #   src/${PROJECT_NAME}/ads7830.cpp
 # )
 add_library(libads7830 STATIC ${LIBRARY_PATH}/ads7830.cpp)
+target_link_libraries(libads7830 ${WIRINGPI_LIBRARIES})
 
 ## Add cmake target dependencies of the library
 ## as an example, code may need to be generated before libraries
