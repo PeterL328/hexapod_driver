@@ -17,9 +17,9 @@ int main(int argc, char **argv)
     ros::Publisher battery_level_pub = n.advertise<ads7830::Battery>(battery_level_topic_name, 1000);
     ros::Rate loop_rate(publish_rate_in_hz);
 
-    // Battery configuration setup
-    const float li_ion_cut_off_v = 3.0f;
-    const float li_ion_max_v = 4.2f;
+    // Battery configuration setup (Two li-ion cells in series)
+    const float li_ion_cut_off_v = 6.0f;
+    const float li_ion_max_v = 8.4f;
     Battery::BatteryStatus battery_monitor{li_ion_cut_off_v, li_ion_max_v};
 
     while (ros::ok())
@@ -30,8 +30,14 @@ int main(int argc, char **argv)
         ads7830::Battery msg;
 
         // Read battery status
-        msg.control_board_battery = battery_monitor.read_battery_percentage(Battery::BatteryType::CONTROL_BOARD);
-        msg.servo_battery = battery_monitor.read_battery_percentage(Battery::BatteryType::SERVO);
+        std::pair<float, float> battery_status_control_board = battery_monitor.read_battery_percentage(Battery::BatteryType::CONTROL_BOARD);
+        std::pair<float, float> battery_status_servo = battery_monitor.read_battery_percentage(Battery::BatteryType::SERVO);
+
+        // Populating the battery message
+        msg.control_board_battery_v = battery_status_control_board.first;
+        msg.control_board_battery_percentage = battery_status_control_board.second;
+        msg.servo_battery_v = battery_status_servo.first;
+        msg.servo_battery_percentage = battery_status_servo.second;
 
         /**
          * The publish() function is how you send messages. The parameter

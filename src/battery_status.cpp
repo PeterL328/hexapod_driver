@@ -16,7 +16,7 @@ namespace Battery {
         ROS_INFO("Successfully connected to ADS7830 via I2C.");
     }
 
-    float BatteryStatus::read_battery_percentage(BatteryType battery) {
+    std::pair<float, float> BatteryStatus::read_battery_percentage(BatteryType battery) {
         int channel = 0;
         if (battery == BatteryType::CONTROL_BOARD) {
             channel = 4;
@@ -26,6 +26,9 @@ namespace Battery {
             ROS_ERROR("Invalid battery type. ");
             throw std::invalid_argument("Invalid battery type.");
         }
-        return ADS7830_controller->read_voltage(channel);
+        float voltage = ADS7830_controller->read_voltage(channel);
+        // Assuming the voltage is between the lower bound and upper bound.
+        float percentage = (voltage - lower_bound_) / (upper_bound_ - lower_bound_);
+        return {voltage, percentage};
     }
 }
