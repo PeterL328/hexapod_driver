@@ -8,9 +8,8 @@ add_compile_options(-std=c++14)
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
-  roscpp
-  std_msgs
-  message_generation
+    roscpp
+    sensor_msgs
 )
 
 ## System dependencies are found with CMake's conventions
@@ -47,10 +46,10 @@ find_package(catkin REQUIRED COMPONENTS
 ##   * add every package in MSG_DEP_SET to generate_messages(DEPENDENCIES ...)
 
 ## Generate messages in the 'msg' folder
-add_message_files(
-    FILES
-    Battery.msg
-)
+# add_message_files(
+#     FILES
+#     Battery.msg
+# )
 
 ## Generate services in the 'srv' folder
 # add_service_files(
@@ -67,10 +66,10 @@ add_message_files(
 # )
 
 ## Generate added messages and services with any dependencies listed here
-generate_messages(
-    DEPENDENCIES
-    std_msgs
-)
+# generate_messages(
+#    DEPENDENCIES
+#    std_msgs
+# )
 
 ################################################
 ## Declare ROS dynamic reconfigure parameters ##
@@ -102,11 +101,10 @@ generate_messages(
 ## CATKIN_DEPENDS: catkin_packages dependent projects also need
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
-#  INCLUDE_DIRS include
-#  LIBRARIES ads7830
-#  CATKIN_DEPENDS roscpp
-#  DEPENDS system_lib
+#     INCLUDE_DIRS include
+#     CATKIN_DEPENDS roscpp message_runtime sensor_msgs
 )
+
 
 ###########
 ## Build ##
@@ -123,8 +121,8 @@ file(GLOB_RECURSE HEADERS "${SRC_DIRS}/*.h")
 ## Your package locations should be listed before other locations
 include_directories(
 # include
-  ${catkin_INCLUDE_DIRS}
-  ${LIBRARY_PATH}
+    ${catkin_INCLUDE_DIRS}
+    ${LIBRARY_PATH}
 )
 
 ## External C++ library
@@ -165,7 +163,6 @@ target_include_directories(monitor_battery PRIVATE ${SRC_DIRS})
 ## Add cmake target dependencies of the executable
 ## same as for the library above
 # add_dependencies(${PROJECT_NAME}_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
-add_dependencies(monitor_battery ads7830_generate_messages_cpp)
 
 ## Specify libraries to link a library or executable target against
 # target_link_libraries(${PROJECT_NAME}_node

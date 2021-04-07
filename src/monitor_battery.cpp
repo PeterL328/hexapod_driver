@@ -1,8 +1,8 @@
 #include <iostream>
 
 #include "ros/ros.h"
+#include "sensor_msgs/BatteryState.h"
 
-#include "ads7830/Battery.h"
 #include "battery_status.h"
 
 int main(int argc, char **argv)
@@ -14,7 +14,7 @@ int main(int argc, char **argv)
     ros::init(argc, argv, node_name);
     ros::NodeHandle n;
 
-    ros::Publisher battery_level_pub = n.advertise<ads7830::Battery>(battery_level_topic_name, 1000);
+    ros::Publisher battery_level_pub = n.advertise<sensor_msgs::BatteryState>(battery_level_topic_name, 1000);
     ros::Rate loop_rate(publish_rate_in_hz);
 
     // Battery configuration setup (Two li-ion cells in series)
@@ -24,28 +24,35 @@ int main(int argc, char **argv)
 
     while (ros::ok())
     {
-        /**
-         * This is a message object. You stuff it with data, and then publish it.
-         */
-        ads7830::Battery msg;
+        // Create message objects
+        sensor_msgs::BatteryState control_board_msg;
+        sensor_msgs::BatteryState servo_msg;
 
         // Read battery status
         std::pair<float, float> battery_status_control_board = battery_monitor.read_battery_percentage(Battery::BatteryType::CONTROL_BOARD);
         std::pair<float, float> battery_status_servo = battery_monitor.read_battery_percentage(Battery::BatteryType::SERVO);
 
-        // Populating the battery message
-        msg.control_board_battery_v = battery_status_control_board.first;
-        msg.control_board_battery_percentage = battery_status_control_board.second;
-        msg.servo_battery_v = battery_status_servo.first;
-        msg.servo_battery_percentage = battery_status_servo.second;
+        // Populating the control board battery message
+        control_board_msg.voltage = battery_status_control_board.first;
+        control_board_msg.percentage = battery_status_control_board.second;
+        control_board_msg.power_supply_status = 2;
+        control_board_msg.power_supply_health = 1;
+        control_board_msg.power_supply_technology = 2;
+        control_board_msg.location = "control_board";
+        control_board_msg.present = true;
 
-        /**
-         * The publish() function is how you send messages. The parameter
-         * is the message object. The type of this object must agree with the type
-         * given as a template parameter to the advertise<>() call, as was done
-         * in the constructor above.
-         */
-        battery_level_pub.publish(msg);
+        // Populating the servo battery message
+        servo_msg.voltage = battery_status_servo.first;
+        servo_msg.percentage = battery_status_servo.second;
+        servo_msg.power_supply_status = 2;
+        servo_msg.power_supply_health = 1;
+        servo_msg.power_supply_technology = 2;
+        servo_msg.location = "servo";
+        servo_msg.present = true;
+
+        // Publish message on the topic
+        battery_level_pub.publish(control_board_msg);
+        battery_level_pub.publish(servo_msg);
 
         ros::spinOnce();
 

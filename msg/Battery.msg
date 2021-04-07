@@ -1,4 +1,0 @@
-float32 control_board_battery_v
-float32 control_board_battery_percentage
-float32 servo_battery_v
-float32 servo_battery_percentage
