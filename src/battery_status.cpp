@@ -28,7 +28,10 @@ namespace Battery {
         }
         float voltage = ADS7830_controller->read_voltage(channel);
         // Assuming the voltage is between the lower bound and upper bound.
-        float percentage = (voltage - lower_bound_) / (upper_bound_ - lower_bound_);
+        float percentage = 0.0f;
+        if (voltage >= lower_bound_ && voltage <= upper_bound_) {
+            percentage = (voltage - lower_bound_) / (upper_bound_ - lower_bound_);
+        }
         return {voltage, percentage};
     }
 }
