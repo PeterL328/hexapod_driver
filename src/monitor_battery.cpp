@@ -1,5 +1,3 @@
-#include <iostream>
-
 #include "ros/ros.h"
 #include "sensor_msgs/BatteryState.h"
 
@@ -35,18 +33,18 @@ int main(int argc, char **argv)
         // Populating the control board battery message
         control_board_msg.voltage = battery_status_control_board.first;
         control_board_msg.percentage = battery_status_control_board.second;
-        control_board_msg.power_supply_status = 2;
-        control_board_msg.power_supply_health = 1;
-        control_board_msg.power_supply_technology = 2;
+        control_board_msg.power_supply_status = sensor_msgs::BatteryState::POWER_SUPPLY_STATUS_DISCHARGING;
+        control_board_msg.power_supply_health = sensor_msgs::BatteryState::POWER_SUPPLY_HEALTH_GOOD;
+        control_board_msg.power_supply_technology = sensor_msgs::BatteryState::POWER_SUPPLY_TECHNOLOGY_LION;
         control_board_msg.location = "control_board";
         control_board_msg.present = true;
 
         // Populating the servo battery message
         servo_msg.voltage = battery_status_servo.first;
         servo_msg.percentage = battery_status_servo.second;
-        servo_msg.power_supply_status = 2;
-        servo_msg.power_supply_health = 1;
-        servo_msg.power_supply_technology = 2;
+        servo_msg.power_supply_status = sensor_msgs::BatteryState::POWER_SUPPLY_STATUS_DISCHARGING;
+        servo_msg.power_supply_health = sensor_msgs::BatteryState::POWER_SUPPLY_HEALTH_GOOD;
+        servo_msg.power_supply_technology = sensor_msgs::BatteryState::POWER_SUPPLY_TECHNOLOGY_LION;
         servo_msg.location = "servo";
         servo_msg.present = true;
 
