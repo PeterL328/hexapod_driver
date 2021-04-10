@@ -1,4 +1,5 @@
 #include "ros/ros.h"
+#include <ros/console.h>
 #include "sensor_msgs/BatteryState.h"
 
 #include "battery_status.h"
@@ -7,10 +8,14 @@ int main(int argc, char **argv)
 {
     const std::string node_name = "monitor_battery";
     const std::string battery_level_topic_name = "battery_level";
-    const int publish_rate_in_hz = 1;
 
     ros::init(argc, argv, node_name);
-    ros::NodeHandle n;
+    ros::NodeHandle n("~");
+
+    // Get values from arguments
+    int publish_rate_in_hz;
+    n.param("publish_rate", publish_rate_in_hz, 1);
+    ROS_INFO("Publishing at %dHz.", publish_rate_in_hz);
 
     ros::Publisher battery_level_pub = n.advertise<sensor_msgs::BatteryState>(battery_level_topic_name, 1000);
     ros::Rate loop_rate(publish_rate_in_hz);
