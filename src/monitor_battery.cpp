@@ -13,9 +13,9 @@ int main(int argc, char **argv)
     ros::NodeHandle n("~");
 
     // Get values from arguments
-    int publish_rate_in_hz;
-    n.param("publish_rate", publish_rate_in_hz, 1);
-    ROS_INFO("Publishing at %dHz.", publish_rate_in_hz);
+    float publish_rate_in_hz;
+    n.param("publish_rate", publish_rate_in_hz, 1.0f);
+    ROS_INFO("Publishing at %fHz.", publish_rate_in_hz);
 
     ros::Publisher battery_level_pub = n.advertise<sensor_msgs::BatteryState>(battery_level_topic_name, 1000);
     ros::Rate loop_rate(publish_rate_in_hz);
