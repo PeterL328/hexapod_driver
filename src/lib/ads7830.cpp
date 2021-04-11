@@ -8,7 +8,8 @@ ADS7830::ADS7830(int i2c_bus, int device_address) :
 
 int ADS7830::connect() {
     file_descriptor_ = wiringPiI2CSetup(device_address_);
-    if (file_descriptor_ == -1) {
+    // TODO: Can still return a positive fd if device is not connected
+    if (file_descriptor_ < 0) {
         return -1;
     }
     return 1;

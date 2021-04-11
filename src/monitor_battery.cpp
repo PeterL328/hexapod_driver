@@ -36,22 +36,40 @@ int main(int argc, char **argv)
         std::pair<float, float> battery_status_servo = battery_monitor.read_battery_percentage(Battery::BatteryType::SERVO);
 
         // Populating the control board battery message
-        control_board_msg.voltage = battery_status_control_board.first;
         control_board_msg.percentage = battery_status_control_board.second;
-        control_board_msg.power_supply_status = sensor_msgs::BatteryState::POWER_SUPPLY_STATUS_DISCHARGING;
-        control_board_msg.power_supply_health = sensor_msgs::BatteryState::POWER_SUPPLY_HEALTH_GOOD;
         control_board_msg.power_supply_technology = sensor_msgs::BatteryState::POWER_SUPPLY_TECHNOLOGY_LION;
         control_board_msg.location = "control_board";
-        control_board_msg.present = true;
+
+        // Check if battery is installed
+        if (battery_status_control_board.first <= 0.0f) {
+            control_board_msg.voltage = 0.0f;
+            control_board_msg.power_supply_status = sensor_msgs::BatteryState::POWER_SUPPLY_STATUS_UNKNOWN;
+            control_board_msg.power_supply_health = sensor_msgs::BatteryState::POWER_SUPPLY_HEALTH_UNKNOWN;
+            control_board_msg.present = false;
+        } else {
+            control_board_msg.voltage = battery_status_control_board.first;
+            control_board_msg.power_supply_status = sensor_msgs::BatteryState::POWER_SUPPLY_STATUS_DISCHARGING;
+            control_board_msg.power_supply_health = sensor_msgs::BatteryState::POWER_SUPPLY_HEALTH_GOOD;
+            control_board_msg.present = true;
+        }
 
         // Populating the servo battery message
-        servo_msg.voltage = battery_status_servo.first;
         servo_msg.percentage = battery_status_servo.second;
-        servo_msg.power_supply_status = sensor_msgs::BatteryState::POWER_SUPPLY_STATUS_DISCHARGING;
-        servo_msg.power_supply_health = sensor_msgs::BatteryState::POWER_SUPPLY_HEALTH_GOOD;
         servo_msg.power_supply_technology = sensor_msgs::BatteryState::POWER_SUPPLY_TECHNOLOGY_LION;
         servo_msg.location = "servo";
-        servo_msg.present = true;
+
+        // Check if battery is installed
+        if (battery_status_servo.first <= 0.0f) {
+            servo_msg.voltage = 0.0f;
+            servo_msg.power_supply_status = sensor_msgs::BatteryState::POWER_SUPPLY_STATUS_UNKNOWN;
+            servo_msg.power_supply_health = sensor_msgs::BatteryState::POWER_SUPPLY_HEALTH_UNKNOWN;
+            servo_msg.present = false;
+        } else {
+            servo_msg.voltage = battery_status_servo.first;
+            servo_msg.power_supply_status = sensor_msgs::BatteryState::POWER_SUPPLY_STATUS_DISCHARGING;
+            servo_msg.power_supply_health = sensor_msgs::BatteryState::POWER_SUPPLY_HEALTH_GOOD;
+            servo_msg.present = true;
+        }
 
         // Publish message on the topic
         battery_level_pub.publish(control_board_msg);

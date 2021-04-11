@@ -27,6 +27,7 @@ namespace Battery {
         /// \param battery Indicates which battery is used
         /// \return Returns the battery percentage in a pair of value.
         ///         The first value is the battery status in voltage and the second is in percentage (decimal).
+        ///         If the voltage is faulty, then a -1.0f voltage will be be returned
         std::pair<float, float> read_battery_percentage(BatteryType battery);
     };
 }
