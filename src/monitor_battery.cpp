@@ -35,7 +35,11 @@ int main(int argc, char **argv)
         std::pair<float, float> battery_status_control_board = battery_monitor.read_battery_percentage(Battery::BatteryType::CONTROL_BOARD);
         std::pair<float, float> battery_status_servo = battery_monitor.read_battery_percentage(Battery::BatteryType::SERVO);
 
+        // Get current time
+        ros::Time current_timestamp = ros::Time::now();
+
         // Populating the control board battery message
+        control_board_msg.header.stamp = current_timestamp;
         control_board_msg.percentage = battery_status_control_board.second;
         control_board_msg.power_supply_technology = sensor_msgs::BatteryState::POWER_SUPPLY_TECHNOLOGY_LION;
         control_board_msg.location = "control_board";
@@ -54,6 +58,7 @@ int main(int argc, char **argv)
         }
 
         // Populating the servo battery message
+        servo_msg.header.stamp = current_timestamp;
         servo_msg.percentage = battery_status_servo.second;
         servo_msg.power_supply_technology = sensor_msgs::BatteryState::POWER_SUPPLY_TECHNOLOGY_LION;
         servo_msg.location = "servo";
