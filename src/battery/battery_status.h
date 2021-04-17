@@ -18,7 +18,6 @@ namespace Battery {
 
     public:
         /// Creates an instance of a BatteryStatus object.
-
         /// \param lower_bound The cut-off voltage of the battery cell.
         /// \param upper_bound The maximum voltage of the battery cell.
         explicit BatteryStatus(float lower_bound, float upper_bound);

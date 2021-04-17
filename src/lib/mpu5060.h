@@ -15,7 +15,7 @@ private:
     /// \return Returns the data at the register.
     int read_data(int address);
 public:
-    ///
+    /// Initialize object for MPU5060
     /// \param i2c_bus The I2C bus number.
     /// \param device_address The address of the MPU5060.
     /// \param power_management_reg_address The address of the power management register.

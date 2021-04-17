@@ -140,6 +140,10 @@ target_link_libraries(libads7830 ${WIRINGPI_LIBRARIES})
 add_library(libmpu5060 STATIC ${LIBRARY_DIRS}/mpu5060.cpp)
 target_link_libraries(libmpu5060 ${WIRINGPI_LIBRARIES})
 
+# PCA9685
+add_library(libpca9685 STATIC ${LIBRARY_DIRS}/pca9685.cpp)
+target_link_libraries(libpca9685 ${WIRINGPI_LIBRARIES})
+
 ## Add cmake target dependencies of the library
 ## as an example, code may need to be generated before libraries
 ## either from message generation or dynamic reconfigure
