@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.0.2)
-project(ads7830)
+project(hexapod_driver)
 
 ## Compile as C++14, supported in ROS Kinetic and newer
 add_compile_options(-std=c++14)
@@ -112,17 +112,17 @@ catkin_package(
 
 # Variables
 set(SRC_DIRS src)
-set(LIBRARY_PATH ${SRC_DIRS}/lib)
+set(LIBRARY_DIRS ${SRC_DIRS}/lib)
+set(BATTERY_DIRS ${SRC_DIRS}/battery)
+set(IMU_DIRS ${SRC_DIRS}/imu)
 
-file(GLOB_RECURSE SOURCES "${SRC_DIRS}/*.cpp")
-file(GLOB_RECURSE HEADERS "${SRC_DIRS}/*.h")
 
 ## Specify additional locations of header files
 ## Your package locations should be listed before other locations
 include_directories(
 # include
     ${catkin_INCLUDE_DIRS}
-    ${LIBRARY_PATH}
+    ${LIBRARY_DIRS}
 )
 
 ## External C++ library
@@ -132,8 +132,13 @@ find_library(WIRINGPI_LIBRARIES NAMES wiringPi)
 # add_library(${PROJECT_NAME}
 #   src/${PROJECT_NAME}/ads7830.cpp
 # )
-add_library(libads7830 STATIC ${LIBRARY_PATH}/ads7830.cpp)
+# ADS7830
+add_library(libads7830 STATIC ${LIBRARY_DIRS}/ads7830.cpp)
 target_link_libraries(libads7830 ${WIRINGPI_LIBRARIES})
+
+# MPU5060
+add_library(libmpu5060 STATIC ${LIBRARY_DIRS}/mpu5060.cpp)
+target_link_libraries(libmpu5060 ${WIRINGPI_LIBRARIES})
 
 ## Add cmake target dependencies of the library
 ## as an example, code may need to be generated before libraries
@@ -144,15 +149,16 @@ target_link_libraries(libads7830 ${WIRINGPI_LIBRARIES})
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
 # add_executable(${PROJECT_NAME}_node src/ads7830_node.cpp)
-add_executable(monitor_battery ${SOURCES})
-
-foreach (_headerFile ${HEADERS})
-    get_filename_component(_dir ${_headerFile} PATH)
-    list (APPEND SRC_DIRS ${_dir})
-endforeach()
-list(REMOVE_DUPLICATES SRC_DIRS)
-
-target_include_directories(monitor_battery PRIVATE ${SRC_DIRS})
+add_executable(
+    monitor_battery
+    ${BATTERY_DIRS}/monitor_battery.cpp
+    ${BATTERY_DIRS}/battery_status.cpp
+)
+add_executable(
+    imu_readings
+    ${IMU_DIRS}/imu_readings.cpp
+    ${IMU_DIRS}/imu_sensor.cpp
+)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -170,6 +176,9 @@ target_include_directories(monitor_battery PRIVATE ${SRC_DIRS})
 # )
 target_link_libraries(monitor_battery ${catkin_LIBRARIES})
 target_link_libraries(monitor_battery libads7830)
+
+target_link_libraries(imu_readings ${catkin_LIBRARIES})
+target_link_libraries(imu_readings libmpu5060)
 
 #############
 ## Install ##

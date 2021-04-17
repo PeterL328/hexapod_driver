@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <package format="2">
-  <name>ads7830</name>
+  <name>hexapod_driver</name>
   <version>1.0.0</version>
-  <description>ROS package for using the ADS7830 IC (Analog-to-Digital converter) </description>
+  <description>ROS package containing drivers for interfacing with onboard sensors.</description>
 
   <!-- One maintainer tag required, multiple allowed, one person per tag -->
   <!-- Example:  -->

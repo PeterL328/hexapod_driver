@@ -1,9 +1,12 @@
-# ADS7830
+# Hexapod driver
 
 ## About The Project
-This ROS package is used by the [Hexapod project](https://github.com/PeterL328/hexapod) and contains a ROS node to monitor the battery level via the
-ADS7830 IC. The ADS7830 driver code is also included in this repo and can be used independently of ROS.
+This ROS package is used by the [Hexapod project](https://github.com/PeterL328/hexapod) and contains ROS nodes for using different on-board sensors.
 At the moment, the package is meant for the [Freenove Big Hexapod kit](https://github.com/Freenove/Freenove_Big_Hexapod_Robot_Kit_for_Raspberry_Pi) and is meant for their custom Raspberry-pi shield.
+
+Included sensors:
+- ADS7830
+- MPU5060
 
 ## Getting Started
 To use this package, ROS needs to be installed on your Raspberry-pi.
