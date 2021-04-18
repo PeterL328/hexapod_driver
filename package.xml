@@ -2,7 +2,7 @@
 <package format="2">
   <name>hexapod_driver</name>
   <version>1.0.0</version>
-  <description>ROS package containing drivers for interfacing with onboard sensors.</description>
+  <description>ROS package containing ROS nodes for using on-board sensors.</description>
 
   <!-- One maintainer tag required, multiple allowed, one person per tag -->
   <!-- Example:  -->
