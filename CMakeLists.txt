@@ -113,8 +113,10 @@ catkin_package(
 # Variables
 set(SRC_DIRS src)
 set(LIBRARY_DIRS ${SRC_DIRS}/lib)
+
 set(BATTERY_DIRS ${SRC_DIRS}/battery)
 set(IMU_DIRS ${SRC_DIRS}/imu)
+set(SERVO_DIRS ${SRC_DIRS}/servo)
 
 
 ## Specify additional locations of header files
@@ -163,6 +165,11 @@ add_executable(
     ${IMU_DIRS}/imu_readings.cpp
     ${IMU_DIRS}/imu_sensor.cpp
 )
+add_executable(
+    joint_controller
+    ${SERVO_DIRS}/joint_controller.cpp
+    ${SERVO_DIRS}/servo_controller.cpp
+)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -183,6 +190,9 @@ target_link_libraries(monitor_battery libads7830)
 
 target_link_libraries(imu_readings ${catkin_LIBRARIES})
 target_link_libraries(imu_readings libmpu5060)
+
+target_link_libraries(joint_controller ${catkin_LIBRARIES})
+target_link_libraries(joint_controller libpca9685)
 
 #############
 ## Install ##

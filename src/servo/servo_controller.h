@@ -22,6 +22,7 @@ namespace Servo {
     private:
         std::unique_ptr<PCA9685> PCA9685_controller_1;
         std::unique_ptr<PCA9685> PCA9685_controller_2;
+        const int i2c_bus_line_{1};
         const float lower_bound_angle_{0.0f};
         const float upper_bound_angle_{180.0f};
         const float servo_control_frequency_{50.0f};

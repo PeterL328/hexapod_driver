@@ -8,7 +8,7 @@ public:
     /// Initialize object for PCA9685.
     /// \param i2c_bus The I2C bus number.
     /// \param device_address The address of the PCA9685.
-    explicit PCA9685(int i2c_bus = 1, int device_address = 0x40);
+    explicit PCA9685(int i2c_bus, int device_address);
 
     /// Initialize object for PCA9685 on the first i2c bus.
     /// \param device_address The address of the PCA9685.
