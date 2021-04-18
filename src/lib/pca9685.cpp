@@ -9,8 +9,7 @@
 PCA9685::PCA9685(int i2c_bus, int device_address) :
         i2c_bus_(i2c_bus), device_address_(device_address) {}
 
-PCA9685::PCA9685(int device_address) :
-        i2c_bus_(1), device_address_(device_address) {}
+PCA9685::PCA9685(int device_address): PCA9685(1, device_address) {}
 
 int PCA9685::connect() {
     file_descriptor_ = wiringPiI2CSetup(device_address_);
