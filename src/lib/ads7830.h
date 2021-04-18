@@ -15,7 +15,7 @@ public:
     /// Reads the voltage at a given channel.
     /// \param channel The channel to read the voltage.
     /// \return Returns the voltage at the given channel.
-    float read_voltage(int channel);
+    float read_voltage(int channel) const;
 
 private:
     int i2c_bus_;

@@ -16,7 +16,7 @@ namespace Battery {
         ROS_INFO("Successfully connected to ADS7830 via I2C.");
     }
 
-    std::pair<float, float> BatteryStatus::read_battery_percentage(BatteryType battery) {
+    std::pair<float, float> BatteryStatus::read_battery_percentage(BatteryType battery) const {
         int channel = 0;
         if (battery == BatteryType::CONTROL_BOARD) {
             channel = 4;

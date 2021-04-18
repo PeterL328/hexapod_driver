@@ -13,11 +13,11 @@ namespace Imu {
 
         /// Reads the linear acceleration. Unit: m/s^2
         /// \return Returns The linear accelerations in the order of [x, y, z].
-        std::array<float, 3> read_linear_acceleration();
+        std::array<float, 3> read_linear_acceleration() const;
 
         /// Reads the angular velocity. Unit: rad/sec
         /// \return Returns The angular velocities in the order of [x, y, z].
-        std::array<float, 3> read_angular_velocity();
+        std::array<float, 3> read_angular_velocity() const;
 
     private:
         std::unique_ptr<MPU5060> MPU5060_controller;

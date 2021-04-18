@@ -15,7 +15,7 @@ int ADS7830::connect() {
     return 1;
 }
 
-float ADS7830::read_voltage(int channel) {
+float ADS7830::read_voltage(int channel) const {
     /* ADS7830 Command Set
      * MSB | 6 | 5 | 4 | 3 | 2 | 1 | LSB |
      *  SD | C2| C1| C0|PD1|PD0| X |  X  |

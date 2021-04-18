@@ -16,7 +16,7 @@ int MPU5060::connect() {
     return 1;
 }
 
-std::array<float, 3> MPU5060::read_linear_acceleration(int x_address, int y_address, int z_address) {
+std::array<float, 3> MPU5060::read_linear_acceleration(int x_address, int y_address, int z_address) const {
     // At default sensitivity of 2g we need to scale by 16384.
     // and since we want to units to be m/s^2, we need to divide by g.
     const float scaling_factor = 16384 / 9.807;
@@ -28,7 +28,7 @@ std::array<float, 3> MPU5060::read_linear_acceleration(int x_address, int y_addr
     return data;
 }
 
-std::array<float, 3> MPU5060::read_angular_velocity(int x_address, int y_address, int z_address) {
+std::array<float, 3> MPU5060::read_angular_velocity(int x_address, int y_address, int z_address) const {
     // At default sensitivity of 250deg/s we need to scale by 131.
     const float scaling_factor = 131.0f;
     // The data array layout is [x, y, z].
@@ -39,7 +39,7 @@ std::array<float, 3> MPU5060::read_angular_velocity(int x_address, int y_address
     return data;
 }
 
-int MPU5060::read_data(int address) {
+int MPU5060::read_data(int address) const {
     int high = wiringPiI2CReadReg8(file_descriptor_, address);
     int low = wiringPiI2CReadReg8(file_descriptor_, address + 1);
     int data = (high << 8) + low;

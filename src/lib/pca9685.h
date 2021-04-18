@@ -10,6 +10,10 @@ public:
     /// \param device_address The address of the PCA9685.
     explicit PCA9685(int i2c_bus = 1, int device_address = 0x40);
 
+    /// Initialize object for PCA9685 on the first i2c bus.
+    /// \param device_address The address of the PCA9685.
+    explicit PCA9685(int device_address = 0x40);
+
     /// Connects to the I2C device
     /// \return Returns 1 for success and -1 for unsuccessfully connection
     int connect();
@@ -45,11 +49,18 @@ public:
     /// \param off The number of units from 0 until we switch OFF.
     void set_all_pwm(uint16_t on, uint16_t off);
 
+    /// Gets the number of total channels
+    /// \return The number of total channels.
+    inline int num_channel() {
+        return num_channel_;
+    }
+
 private:
     int i2c_bus_;
     int device_address_;
     int file_descriptor_;
     float frequency_hz_;
+    const int num_channel_{16};
 };
 
 #endif //PCA9685_LIBRARY_H

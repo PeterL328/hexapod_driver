@@ -15,11 +15,11 @@ namespace Imu {
         ROS_INFO("Successfully connected to MPU5060 via I2C.");
     }
 
-    std::array<float, 3> ImuSensor::read_linear_acceleration() {
+    std::array<float, 3> ImuSensor::read_linear_acceleration() const {
         return MPU5060_controller->read_linear_acceleration();
     }
 
-    std::array<float, 3> ImuSensor::read_angular_velocity() {
+    std::array<float, 3> ImuSensor::read_angular_velocity() const {
         return MPU5060_controller->read_angular_velocity();
     }
 }

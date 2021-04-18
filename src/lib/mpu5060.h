@@ -21,7 +21,7 @@ public:
     /// \param y_address The address of the register for y-acceleration.
     /// \param z_address The address of the register for z-acceleration.
     /// \return Returns The linear accelerations in the order of [x, y, z].
-    std::array<float, 3> read_linear_acceleration(int x_address = 0x3B, int y_address = 0x3D, int z_address = 0x3F);
+    std::array<float, 3> read_linear_acceleration(int x_address = 0x3B, int y_address = 0x3D, int z_address = 0x3F) const;
 
     /// Reads the angular velocity. Unit: rad/sec
     /// Assuming at <address> is the high bytes and <address + 1> is the low bytes.
@@ -29,7 +29,7 @@ public:
     /// \param y_address The address of the register for y-angular-velocity.
     /// \param z_address The address of the register for z-angular-velocity.
     /// \return Returns The angular velocities in the order of [x, y, z].
-    std::array<float, 3> read_angular_velocity(int x_address = 0x43, int y_address = 0x45, int z_address = 0x47);
+    std::array<float, 3> read_angular_velocity(int x_address = 0x43, int y_address = 0x45, int z_address = 0x47) const;
 
 private:
     int i2c_bus_;
@@ -40,7 +40,7 @@ private:
     /// Reads the data at a register given the address.
     /// \param address The address of the register. Assuming at <address> is the high bytes and <address + 1> is the low bytes.
     /// \return Returns the data at the register.
-    int read_data(int address);
+    int read_data(int address) const;
 };
 
 #endif //MPU5060_LIBRARY_H
