@@ -4,12 +4,6 @@
 #include <cstdint>
 
 class PCA9685 {
-private:
-    int i2c_bus_;
-    int device_address_;
-    int file_descriptor_;
-    float frequency_hz_;
-
 public:
     /// Initialize object for PCA9685.
     /// \param i2c_bus The I2C bus number.
@@ -50,6 +44,12 @@ public:
     /// \param on The number of units from 0 until we switch ON.
     /// \param off The number of units from 0 until we switch OFF.
     void set_all_pwm(uint16_t on, uint16_t off);
+
+private:
+    int i2c_bus_;
+    int device_address_;
+    int file_descriptor_;
+    float frequency_hz_;
 };
 
 #endif //PCA9685_LIBRARY_H

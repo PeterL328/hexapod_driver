@@ -22,7 +22,7 @@ int main(int argc, char **argv)
     ros::Publisher imu_raw_pub = n.advertise<sensor_msgs::Imu>(imu_raw_topic_name, 1000);
     ros::Rate loop_rate(publish_rate_in_hz);
 
-    IMU::IMU_SENSOR imu{};
+    Imu::ImuSensor imu{};
 
     while (ros::ok())
     {

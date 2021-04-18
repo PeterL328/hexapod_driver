@@ -2,10 +2,6 @@
 #define ADS7830_LIBRARY_H
 
 class ADS7830 {
-private:
-    int i2c_bus_;
-    int device_address_;
-    int file_descriptor_;
 public:
     /// Initialize object for ADS7830
     /// \param i2c_bus The I2C bus number.
@@ -20,6 +16,11 @@ public:
     /// \param channel The channel to read the voltage.
     /// \return Returns the voltage at the given channel.
     float read_voltage(int channel);
+
+private:
+    int i2c_bus_;
+    int device_address_;
+    int file_descriptor_;
 };
 
 #endif //ADS7830_LIBRARY_H

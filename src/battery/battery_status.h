@@ -1,5 +1,5 @@
-#ifndef ADS7830_BATTERY_STATUS_H
-#define ADS7830_BATTERY_STATUS_H
+#ifndef BATTERY_STATUS_H
+#define BATTERY_STATUS_H
 
 #include <memory>
 
@@ -11,11 +11,6 @@ namespace Battery {
         SERVO
     };
     class BatteryStatus {
-    private:
-        std::unique_ptr<ADS7830> ADS7830_controller;
-        float lower_bound_;
-        float upper_bound_;
-
     public:
         /// Creates an instance of a BatteryStatus object.
         /// \param lower_bound The cut-off voltage of the battery cell.
@@ -28,6 +23,12 @@ namespace Battery {
         ///         The first value is the battery status in voltage and the second is in percentage (decimal).
         ///         If the voltage is faulty, then a -1.0f voltage will be be returned
         std::pair<float, float> read_battery_percentage(BatteryType battery);
+
+    private:
+        std::unique_ptr<ADS7830> ADS7830_controller;
+        float lower_bound_;
+        float upper_bound_;
+
     };
 }
-#endif //ADS7830_BATTERY_STATUS_H
+#endif //BATTERY_STATUS_H

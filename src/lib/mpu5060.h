@@ -4,16 +4,6 @@
 #include <array>
 
 class MPU5060 {
-private:
-    int i2c_bus_;
-    int device_address_;
-    int file_descriptor_;
-    int power_management_reg_address_;
-
-    /// Reads the data at a register given the address.
-    /// \param address The address of the register. Assuming at <address> is the high bytes and <address + 1> is the low bytes.
-    /// \return Returns the data at the register.
-    int read_data(int address);
 public:
     /// Initialize object for MPU5060
     /// \param i2c_bus The I2C bus number.
@@ -40,6 +30,17 @@ public:
     /// \param z_address The address of the register for z-angular-velocity.
     /// \return Returns The angular velocities in the order of [x, y, z].
     std::array<float, 3> read_angular_velocity(int x_address = 0x43, int y_address = 0x45, int z_address = 0x47);
+
+private:
+    int i2c_bus_;
+    int device_address_;
+    int file_descriptor_;
+    int power_management_reg_address_;
+
+    /// Reads the data at a register given the address.
+    /// \param address The address of the register. Assuming at <address> is the high bytes and <address + 1> is the low bytes.
+    /// \return Returns the data at the register.
+    int read_data(int address);
 };
 
 #endif //MPU5060_LIBRARY_H
