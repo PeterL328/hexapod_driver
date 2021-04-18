@@ -28,7 +28,8 @@ namespace Servo {
     void ServoController::set_angle(int channel, float angle) {
         // Crop the angle to be between the bounds.
         angle = max(lower_bound_angle_, min(upper_bound_angle_, angle));
-        float milliseconds_on = ((angle * 10) + 850) / 1000.0f;
+        // From experiments, the millisecond bounds are [600, 2700](ms) corresponding to [0, 180](deg).
+        float milliseconds_on = ((angle * 11.666) + 600) / 1000.0f;
         if (channel < 16) {
             PCA9685_controller_2->set_pwm_ms(channel, milliseconds_on);
         } else {
