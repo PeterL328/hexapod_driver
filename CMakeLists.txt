@@ -165,9 +165,10 @@ add_executable(
     ${IMU_DIRS}/imu_readings.cpp
     ${IMU_DIRS}/imu_sensor.cpp
 )
+# Test
 add_executable(
-    joint_controller
-    ${SERVO_DIRS}/joint_controller.cpp
+    test_joint_controller
+    ${SERVO_DIRS}/test_joint_controller.cpp
     ${SERVO_DIRS}/servo_controller.cpp
 )
 
@@ -191,8 +192,8 @@ target_link_libraries(monitor_battery libads7830)
 target_link_libraries(imu_readings ${catkin_LIBRARIES})
 target_link_libraries(imu_readings libmpu5060)
 
-target_link_libraries(joint_controller ${catkin_LIBRARIES})
-target_link_libraries(joint_controller libpca9685)
+target_link_libraries(test_joint_controller ${catkin_LIBRARIES})
+target_link_libraries(test_joint_controller libpca9685)
 
 #############
 ## Install ##

@@ -14,6 +14,9 @@ public:
     /// \param device_address The address of the PCA9685.
     explicit PCA9685(int device_address = 0x40);
 
+    /// Destroys the object and put device in sleep mode.
+    ~PCA9685();
+
     /// Connects to the I2C device
     /// \return Returns 1 for success and -1 for unsuccessfully connection
     int connect();
@@ -61,6 +64,11 @@ private:
     int file_descriptor_;
     float frequency_hz_;
     const int num_channel_{16};
+
+    /// Puts the device in sleep mode.
+    void device_sleep();
+    /// Puts the device in awake mode.
+    void device_wake();
 };
 
 #endif //PCA9685_LIBRARY_H
