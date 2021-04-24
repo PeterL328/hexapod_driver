@@ -28,7 +28,6 @@ namespace Battery {
         std::unique_ptr<ADS7830> ADS7830_controller;
         float lower_bound_;
         float upper_bound_;
-
     };
 }
 #endif //BATTERY_STATUS_H
