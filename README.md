@@ -7,6 +7,7 @@ At the moment, the package is meant for the [Freenove Big Hexapod kit](https://g
 Included sensors:
 - ADS7830
 - MPU5060
+- PCA9685
 
 ## Getting Started
 To use this package, ROS needs to be installed on your Raspberry-pi.
