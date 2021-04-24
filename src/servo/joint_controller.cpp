@@ -1,39 +1,27 @@
-#include "ros/ros.h"
+#include <ros/ros.h>
 #include <ros/console.h>
+#include <hexapod_msgs/LegsJoints.h>
 
+#include "joint_servo_mapping.h"
 #include "servo_controller.h"
+
+void legsStateUpdate(const hexapod_msgs::LegsJoints::ConstPtr &legs_joints){
+    return;
+}
 
 int main(int argc, char **argv)
 {
-    const std::string node_name = "test_joint_controller";
+    const std::string node_name = "joint_controller";
 
     ros::init(argc, argv, node_name);
     ros::NodeHandle n("~");
 
-    // Get values from arguments
-    float publish_rate_in_hz;
-    n.param("publish_rate", publish_rate_in_hz, 0.3f);
-    ROS_INFO("Publishing at %fHz.", publish_rate_in_hz);
-
-    ros::Rate loop_rate(publish_rate_in_hz);
-
     // Setup servo controller object
     Servo::ServoController servo_controller{};
 
-    int i = 0;
-    while (ros::ok())
-    {
-        if (i % 2 == 0) {
-            servo_controller.set_angle(20, 0);
-        } else {
-            servo_controller.set_angle(20, 180);
-        }
-        i++;
-        ros::spinOnce();
+    ros::Subscriber sub = n.subscribe("joints_state", 1, legsStateUpdate);
 
-        loop_rate.sleep();
-    }
-
+    ros::spin();
 
     return 0;
 }

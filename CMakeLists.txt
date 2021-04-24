@@ -10,6 +10,7 @@ add_compile_options(-std=c++14)
 find_package(catkin REQUIRED COMPONENTS
     roscpp
     sensor_msgs
+    hexapod_msgs
 )
 
 ## System dependencies are found with CMake's conventions
@@ -102,7 +103,7 @@ find_package(catkin REQUIRED COMPONENTS
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
 #     INCLUDE_DIRS include
-#     CATKIN_DEPENDS roscpp message_runtime sensor_msgs
+#     CATKIN_DEPENDS roscpp message_runtime sensor_msgs hexapod_msgs
 )
 
 
@@ -165,6 +166,12 @@ add_executable(
     ${IMU_DIRS}/imu_readings.cpp
     ${IMU_DIRS}/imu_sensor.cpp
 )
+add_executable(
+    joint_controller
+    ${SERVO_DIRS}/joint_controller.cpp
+    ${SERVO_DIRS}/servo_controller.cpp
+)
+
 # Test
 add_executable(
     test_joint_controller
@@ -181,6 +188,7 @@ add_executable(
 ## Add cmake target dependencies of the executable
 ## same as for the library above
 # add_dependencies(${PROJECT_NAME}_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+add_dependencies(joint_controller hexapod_msgs_generate_messages_cpp)
 
 ## Specify libraries to link a library or executable target against
 # target_link_libraries(${PROJECT_NAME}_node
@@ -192,6 +200,10 @@ target_link_libraries(monitor_battery libads7830)
 target_link_libraries(imu_readings ${catkin_LIBRARIES})
 target_link_libraries(imu_readings libmpu5060)
 
+target_link_libraries(joint_controller ${catkin_LIBRARIES})
+target_link_libraries(joint_controller libpca9685)
+
+# Test
 target_link_libraries(test_joint_controller ${catkin_LIBRARIES})
 target_link_libraries(test_joint_controller libpca9685)
 
