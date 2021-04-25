@@ -32,4 +32,35 @@ constexpr uint8_t RB_COXA_CH         = 9;
 constexpr uint8_t RB_FEMUR_CH        = 8;
 constexpr uint8_t RB_TIBIA_CH        = 31;
 
+// Direction of the rotation for the servo
+// Left front leg
+constexpr bool LF_COXA_DIR        = 1;
+constexpr bool LF_FEMUR_DIR       = 1;
+constexpr bool LF_TIBIA_DIR       = 1;
+
+// Left middle leg
+constexpr bool LM_COXA_DIR        = 1;
+constexpr bool LM_FEMUR_DIR       = 1;
+constexpr bool LM_TIBIA_DIR       = 1;
+
+// Left back leg
+constexpr bool LB_COXA_DIR        = 1;
+constexpr bool LB_FEMUR_DIR       = 1;
+constexpr bool LB_TIBIA_DIR       = 1;
+
+// Right front leg
+constexpr bool RF_COXA_DIR        = 0;
+constexpr bool RF_FEMUR_DIR       = 0;
+constexpr bool RF_TIBIA_DIR       = 0;
+
+// Right middle leg
+constexpr bool RM_COXA_DIR        = 0;
+constexpr bool RM_FEMUR_DIR       = 0;
+constexpr bool RM_TIBIA_DIR       = 0;
+
+// Right back leg
+constexpr bool RB_COXA_DIR        = 0;
+constexpr bool RB_FEMUR_DIR       = 0;
+constexpr bool RB_TIBIA_DIR       = 0;
+
 #endif //JOINT_SERVO_MAPPING_H
