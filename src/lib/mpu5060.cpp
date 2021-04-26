@@ -21,10 +21,10 @@ std::array<float, 3> MPU5060::read_linear_acceleration(int x_address, int y_addr
     // and since we want to units to be m/s^2, we need to divide by g.
     const float scaling_factor = 16384 / 9.807;
     // The data array layout is [x, y, z].
-    std::array<float, 3> data;
-    data[0] = read_data(x_address) / scaling_factor;
-    data[1] = read_data(y_address) / scaling_factor;
-    data[2] = read_data(z_address) / scaling_factor;
+    std::array<float, 3> data{};
+    data[0] = static_cast<float>(read_data(x_address)) / scaling_factor;
+    data[1] = static_cast<float>(read_data(y_address)) / scaling_factor;
+    data[2] = static_cast<float>(read_data(z_address)) / scaling_factor;
     return data;
 }
 
@@ -32,10 +32,10 @@ std::array<float, 3> MPU5060::read_angular_velocity(int x_address, int y_address
     // At default sensitivity of 250deg/s we need to scale by 131.
     const float scaling_factor = 131.0f;
     // The data array layout is [x, y, z].
-    std::array<float, 3> data;
-    data[0] = read_data(x_address) / scaling_factor;
-    data[1] = read_data(y_address) / scaling_factor;
-    data[2] = read_data(z_address) / scaling_factor;
+    std::array<float, 3> data{};
+    data[0] = static_cast<float>(read_data(x_address)) / scaling_factor;
+    data[1] = static_cast<float>(read_data(y_address)) / scaling_factor;
+    data[2] = static_cast<float>(read_data(z_address)) / scaling_factor;
     return data;
 }
 

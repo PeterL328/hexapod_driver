@@ -25,8 +25,8 @@ int main(int argc, char **argv)
     int i = 0;
     while (ros::ok())
     {
-        int upper_angle = 180;
-        int lower_angle = 0;
+        float upper_angle = 180.f;
+        float lower_angle = 0.f;
         if (i % 2 == 0) {
             ROS_INFO("Setting angle to %d degrees on channel: %d.", upper_angle, channel);
             servo_controller.set_angle(channel, upper_angle);

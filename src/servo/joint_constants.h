@@ -34,33 +34,33 @@ constexpr uint8_t RB_TIBIA_CH        = 31;
 
 // Direction of the rotation for the servo
 // Left front leg
-constexpr bool LF_COXA_DIR        = 1;
-constexpr bool LF_FEMUR_DIR       = 1;
-constexpr bool LF_TIBIA_DIR       = 1;
+constexpr bool LF_COXA_DIR        = true;
+constexpr bool LF_FEMUR_DIR       = true;
+constexpr bool LF_TIBIA_DIR       = true;
 
 // Left middle leg
-constexpr bool LM_COXA_DIR        = 1;
-constexpr bool LM_FEMUR_DIR       = 1;
-constexpr bool LM_TIBIA_DIR       = 1;
+constexpr bool LM_COXA_DIR        = true;
+constexpr bool LM_FEMUR_DIR       = true;
+constexpr bool LM_TIBIA_DIR       = true;
 
 // Left back leg
-constexpr bool LB_COXA_DIR        = 1;
-constexpr bool LB_FEMUR_DIR       = 1;
-constexpr bool LB_TIBIA_DIR       = 1;
+constexpr bool LB_COXA_DIR        = true;
+constexpr bool LB_FEMUR_DIR       = true;
+constexpr bool LB_TIBIA_DIR       = true;
 
 // Right front leg
-constexpr bool RF_COXA_DIR        = 0;
-constexpr bool RF_FEMUR_DIR       = 0;
-constexpr bool RF_TIBIA_DIR       = 0;
+constexpr bool RF_COXA_DIR        = false;
+constexpr bool RF_FEMUR_DIR       = false;
+constexpr bool RF_TIBIA_DIR       = false;
 
 // Right middle leg
-constexpr bool RM_COXA_DIR        = 0;
-constexpr bool RM_FEMUR_DIR       = 0;
-constexpr bool RM_TIBIA_DIR       = 0;
+constexpr bool RM_COXA_DIR        = false;
+constexpr bool RM_FEMUR_DIR       = false;
+constexpr bool RM_TIBIA_DIR       = false;
 
 // Right back leg
-constexpr bool RB_COXA_DIR        = 0;
-constexpr bool RB_FEMUR_DIR       = 0;
-constexpr bool RB_TIBIA_DIR       = 0;
+constexpr bool RB_COXA_DIR        = false;
+constexpr bool RB_FEMUR_DIR       = false;
+constexpr bool RB_TIBIA_DIR       = false;
 
 #endif //JOINT_SERVO_MAPPING_H

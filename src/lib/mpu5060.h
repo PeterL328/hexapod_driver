@@ -34,7 +34,7 @@ public:
 private:
     int i2c_bus_;
     int device_address_;
-    int file_descriptor_;
+    int file_descriptor_{};
     int power_management_reg_address_;
 
     /// Reads the data at a register given the address.

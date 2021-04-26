@@ -54,15 +54,15 @@ public:
 
     /// Gets the number of total channels
     /// \return The number of total channels.
-    inline int num_channel() {
+    inline int num_channel() const {
         return num_channel_;
     }
 
 private:
     int i2c_bus_;
     int device_address_;
-    int file_descriptor_;
-    float frequency_hz_;
+    int file_descriptor_{};
+    float frequency_hz_{50.0f};
     const int num_channel_{16};
 
     /// Puts the device in sleep mode.

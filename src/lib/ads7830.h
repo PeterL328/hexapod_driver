@@ -20,7 +20,7 @@ public:
 private:
     int i2c_bus_;
     int device_address_;
-    int file_descriptor_;
+    int file_descriptor_{};
 };
 
 #endif //ADS7830_LIBRARY_H

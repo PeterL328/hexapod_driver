@@ -58,9 +58,9 @@ void PCA9685::set_pwm(int channel, uint16_t on, uint16_t off) {
 }
 
 void PCA9685::set_pwm_ms(int channel, float ms) {
-    float period_ms = 1000.0 / frequency_hz_;
-    int bits_per_ms = PWM_RESOLUTION / period_ms;
-    int bits = ms * bits_per_ms;
+    float period_ms = 1000.0f / frequency_hz_;
+    int bits_per_ms = static_cast<int>(PWM_RESOLUTION / period_ms);
+    int bits = static_cast<int>(ms * static_cast<float>(bits_per_ms));
     set_pwm(channel, 0, bits);
 }
 
