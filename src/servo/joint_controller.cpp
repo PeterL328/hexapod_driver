@@ -13,14 +13,14 @@ JointController::JointController() {
 }
 
 void JointController::legs_state_update(const hexapod_msgs::LegsJoints::ConstPtr &legs_joints) {
-    float rad_2_deg = [](float radian){
+    auto rad_2_deg = [](float radian){
         return radian * (180.f / M_PI);
     };
 
     // Preprocess the joint angle
     // The angles that we are receiving are in radians
     // We need to convert from [-1.5708 rad, +1.5708 rad] -> [0 deg, 180 deg]
-    auto preprocess = [](float angle_rad, bool rotation_dir){
+    auto preprocess = [&rad_2_deg](float angle_rad, bool rotation_dir){
         // 1) Convert from rad to degrees
         float angle_deg = rad_2_deg(angle_rad);
         // 2) Add offset so [-90, 90] -> [0, 180]
