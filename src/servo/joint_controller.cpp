@@ -66,6 +66,7 @@ void JointController::legs_state_update(const hexapod_msgs::LegsJoints::ConstPtr
 int main(int argc, char **argv)
 {
     const std::string node_name = "joint_controller";
+    const std::string joints_command_topic_name = "joints_command";
 
     ros::init(argc, argv, node_name);
     ros::NodeHandle n("~");
@@ -73,7 +74,7 @@ int main(int argc, char **argv)
     // Setup servo controller object
     JointController joint_controller{};
 
-    ros::Subscriber sub = n.subscribe("joints_state", 1, &JointController::legs_state_update, &joint_controller);
+    ros::Subscriber sub = n.subscribe(joints_command_topic_name, 1, &JointController::legs_state_update, &joint_controller);
 
     ros::spin();
     return 0;
