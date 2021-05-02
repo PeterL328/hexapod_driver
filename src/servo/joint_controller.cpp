@@ -12,7 +12,7 @@ JointController::JointController() {
     servo_controller = std::make_unique<Servo::ServoController>();
 }
 
-void JointController::legs_state_update(const hexapod_msgs::LegsJoints::ConstPtr &legs_joints) {
+void JointController::legs_state_update_callback(const hexapod_msgs::LegsJoints::ConstPtr &legs_joints) {
     auto rad_2_deg = [](float radian){
         return radian * (180.f / M_PI);
     };
@@ -74,7 +74,7 @@ int main(int argc, char **argv)
     // Setup servo controller object
     JointController joint_controller{};
 
-    ros::Subscriber sub = n.subscribe(joints_command_topic_name, 1, &JointController::legs_state_update, &joint_controller);
+    ros::Subscriber sub = n.subscribe(joints_command_topic_name, 1, &JointController::legs_state_update_callback, &joint_controller);
 
     ros::spin();
     return 0;
