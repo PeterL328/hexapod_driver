@@ -32,6 +32,37 @@ constexpr uint8_t RB_COXA_CH         = 9;
 constexpr uint8_t RB_FEMUR_CH        = 8;
 constexpr uint8_t RB_TIBIA_CH        = 31;
 
+// Joint offsets. Unit in degrees
+// Left front leg
+constexpr float LF_COXA_OFFSET       = 0.0f;
+constexpr float LF_FEMUR_OFFSET      = 0.0f;
+constexpr float LF_TIBIA_OFFSET      = 0.0f;
+
+// Left middle leg
+constexpr float LM_COXA_OFFSET       = 0.0f;
+constexpr float LM_FEMUR_OFFSET      = 0.0f;
+constexpr float LM_TIBIA_OFFSET      = 0.0f;
+
+// Left back leg
+constexpr float LB_COXA_OFFSET       = 0.0f;
+constexpr float LB_FEMUR_OFFSET      = 0.0f;
+constexpr float LB_TIBIA_OFFSET      = 0.0f;
+
+// Right front leg
+constexpr float RF_COXA_OFFSET       = 0.0f;
+constexpr float RF_FEMUR_OFFSET      = 0.0f;
+constexpr float RF_TIBIA_OFFSET      = 0.0f;
+
+// Right middle leg
+constexpr float RM_COXA_OFFSET       = 0.0f;
+constexpr float RM_FEMUR_OFFSET      = 0.0f;
+constexpr float RM_TIBIA_OFFSET      = 0.0f;
+
+// Right back leg
+constexpr float RB_COXA_OFFSET       = 0.0f;
+constexpr float RB_FEMUR_OFFSET      = 0.0f;
+constexpr float RB_TIBIA_OFFSET      = 0.0f;
+
 // Direction of the rotation for the servo
 // Left front leg
 constexpr bool LF_COXA_DIR        = true;
