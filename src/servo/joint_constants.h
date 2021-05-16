@@ -49,19 +49,19 @@ constexpr float LB_FEMUR_OFFSET      = -3.0f;
 constexpr float LB_TIBIA_OFFSET      = -7.0f;
 
 // Right front leg
-constexpr float RF_COXA_OFFSET       = -7.0f;
-constexpr float RF_FEMUR_OFFSET      = -2.0f;
-constexpr float RF_TIBIA_OFFSET      = -12.5f;
+constexpr float RF_COXA_OFFSET       = 7.0f;
+constexpr float RF_FEMUR_OFFSET      = 2.0f;
+constexpr float RF_TIBIA_OFFSET      = 12.5f;
 
 // Right middle leg
-constexpr float RM_COXA_OFFSET       = -8.0f;
-constexpr float RM_FEMUR_OFFSET      = 12.0f;
-constexpr float RM_TIBIA_OFFSET      = 3.0f;
+constexpr float RM_COXA_OFFSET       = 8.0f;
+constexpr float RM_FEMUR_OFFSET      = -12.0f;
+constexpr float RM_TIBIA_OFFSET      = -3.0f;
 
 // Right back leg
-constexpr float RB_COXA_OFFSET       = -9.0f;
-constexpr float RB_FEMUR_OFFSET      = -7.0f;
-constexpr float RB_TIBIA_OFFSET      = 8.0f;
+constexpr float RB_COXA_OFFSET       = 9.0f;
+constexpr float RB_FEMUR_OFFSET      = 7.0f;
+constexpr float RB_TIBIA_OFFSET      = -8.0f;
 
 // Direction of the rotation for the servo
 // Left front leg

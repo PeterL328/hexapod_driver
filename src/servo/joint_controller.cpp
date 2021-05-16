@@ -24,11 +24,13 @@ void JointController::legs_state_update_callback(const hexapod_msgs::LegsJoints:
         // 1) Convert from rad to degrees
         float angle_deg = rad_2_deg(angle_rad);
         // 2) Shift so [-90, 90] -> [0, 180]
-        angle_deg += 90.f + offset_deg;
+        angle_deg += 90.f;
         // 3) Rotate if needed.
         if (!rotation_dir) {
-            return 180.f - angle_deg;
+            angle_deg = 180.f - angle_deg;
         }
+        // 4) Apply offsets.
+        angle_deg += offset_deg;
         return angle_deg;
     };
 
