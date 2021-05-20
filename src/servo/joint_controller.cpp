@@ -65,10 +65,26 @@ void JointController::legs_state_update_callback(const hexapod_msgs::LegsJoints:
     servo_controller->set_angle(RB_TIBIA_CH, preprocess(legs_joints->right_back_leg.tibia, RB_TIBIA_DIR, RB_TIBIA_OFFSET));
 }
 
+void JointController::head_state_update_callback(const hexapod_msgs::HeadJoints::ConstPrt &head_joins) {
+    auto preprocess = [](float angle_deg, bool rotation_dir, float offset_deg){
+        // 1) Rotate if needed.
+        if (!rotation_dir) {
+            angle_deg = 180.f - angle_deg;
+        }
+        // 2) Apply offsets.
+        angle_deg += offset_deg;
+        return angle_deg;
+    };
+
+    servo_controller->set_angle(H_LR_CH, preprocess(head_joins.up_down, H_UD_DIR, H_UD_OFFSET));
+    servo_controller->set_angle(H_LR_CH, preprocess(head_joins.left_right, H_LR_DIR, H_LR_OFFSET));
+}
+
 int main(int argc, char **argv)
 {
     const std::string node_name = "joint_controller";
     const std::string joints_command_topic_name = "joints_command";
+    const std::string head_command_topic_name = "head_command";
 
     ros::init(argc, argv, node_name);
     ros::NodeHandle n("~");
@@ -77,6 +93,7 @@ int main(int argc, char **argv)
     JointController joint_controller{};
 
     ros::Subscriber sub = n.subscribe(joints_command_topic_name, 1, &JointController::legs_state_update_callback, &joint_controller);
+    ros::Subscriber sub = n.subscribe(head_command_topic_name, 1, &JointController::head_state_update_callback, &joint_controller);
 
     ros::spin();
     return 0;
