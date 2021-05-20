@@ -32,6 +32,10 @@ constexpr uint8_t RB_COXA_CH         = 9;
 constexpr uint8_t RB_FEMUR_CH        = 8;
 constexpr uint8_t RB_TIBIA_CH        = 31;
 
+// Head
+constexpr uint8_t H_UD_CH         = 0;
+constexpr uint8_t H_LR_CH         = 1;
+
 // Joint offsets. Unit in degrees
 // Left front leg
 constexpr float LF_COXA_OFFSET       = 8.5f;
@@ -63,6 +67,10 @@ constexpr float RB_COXA_OFFSET       = 9.0f;
 constexpr float RB_FEMUR_OFFSET      = 7.0f;
 constexpr float RB_TIBIA_OFFSET      = -8.0f;
 
+// Head
+constexpr float H_UD_OFFSET          = 0.0f;
+constexpr float H_LR_OFFSET          = 0.0f;
+
 // Direction of the rotation for the servo
 // Left front leg
 constexpr bool LF_COXA_DIR        = true;
@@ -93,5 +101,9 @@ constexpr bool RM_TIBIA_DIR       = false;
 constexpr bool RB_COXA_DIR        = false;
 constexpr bool RB_FEMUR_DIR       = false;
 constexpr bool RB_TIBIA_DIR       = false;
+
+// Head
+constexpr bool H_UD_DIR           = false;
+constexpr bool H_LR_DIR           = false;
 
 #endif //JOINT_SERVO_MAPPING_H
