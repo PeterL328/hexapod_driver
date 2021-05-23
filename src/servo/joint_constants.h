@@ -68,8 +68,8 @@ constexpr float RB_FEMUR_OFFSET      = 7.0f;
 constexpr float RB_TIBIA_OFFSET      = -8.0f;
 
 // Head
-constexpr float H_UD_OFFSET          = 0.0f;
-constexpr float H_LR_OFFSET          = 0.0f;
+constexpr float H_UPDOWN_OFFSET      = 0.0f;
+constexpr float H_LEFTRIGHT_OFFSET   = 0.0f;
 
 // Direction of the rotation for the servo
 // Left front leg
@@ -103,7 +103,7 @@ constexpr bool RB_FEMUR_DIR       = false;
 constexpr bool RB_TIBIA_DIR       = false;
 
 // Head
-constexpr bool H_UD_DIR           = false;
-constexpr bool H_LR_DIR           = false;
+constexpr bool H_UPDOWN_DIR       = false;
+constexpr bool H_LEFTRIGHT_DIR    = false;
 
 #endif //JOINT_SERVO_MAPPING_H

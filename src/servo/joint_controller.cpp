@@ -44,9 +44,9 @@ void JointController::legs_state_update_callback(const hexapod_msgs::LegsJoints:
     servo_controller->set_angle(RB_TIBIA_CH, JointController::preprocess(legs_joints->right_back_leg.tibia, RB_TIBIA_DIR, RB_TIBIA_OFFSET));
 }
 
-void JointController::head_state_update_callback(const hexapod_msgs::HeadJoints::ConstPrt &head_joins) {
-    servo_controller->set_angle(H_LR_CH, JointController::preprocess(head_joins.up_down, H_UD_DIR, H_UD_OFFSET));
-    servo_controller->set_angle(H_LR_CH, JointController::preprocess(head_joins.left_right, H_LR_DIR, H_LR_OFFSET));
+void JointController::head_state_update_callback(const hexapod_msgs::HeadJoints::ConstPrt &head_joints) {
+    servo_controller->set_angle(HEAD_UPDOWN_CH, JointController::preprocess(head_joints.up_down, H_UPDOWN_DIR, H_UPDOWN_OFFSET));
+    servo_controller->set_angle(HEAD_LEFTRIGHT_CH, JointController::preprocess(head_joints.left_right, H_LEFTRIGHT_DIR, H_LEFTRIGHT_OFFSET));
 }
 
 float JointController::preprocess(float angle_rad, bool rotation_dir, float offset_deg){
