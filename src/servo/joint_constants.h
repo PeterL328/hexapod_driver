@@ -103,7 +103,7 @@ constexpr bool RB_FEMUR_DIR       = false;
 constexpr bool RB_TIBIA_DIR       = false;
 
 // Head
-constexpr bool H_UPDOWN_DIR       = false;
+constexpr bool H_UPDOWN_DIR       = true;
 constexpr bool H_LEFTRIGHT_DIR    = false;
 
 #endif //JOINT_SERVO_MAPPING_H
