@@ -78,8 +78,8 @@ int main(int argc, char **argv)
     // Setup servo controller object
     JointController joint_controller{};
 
-    ros::Subscriber sub = n.subscribe(joints_command_topic_name, 1, &JointController::legs_state_update_callback, &joint_controller);
-    ros::Subscriber sub = n.subscribe(head_command_topic_name, 1, &JointController::head_state_update_callback, &joint_controller);
+    ros::Subscriber joints_sub = n.subscribe(joints_command_topic_name, 1, &JointController::legs_state_update_callback, &joint_controller);
+    ros::Subscriber head_joints_sub = n.subscribe(head_joints_command_topic_name, 1, &JointController::head_state_update_callback, &joint_controller);
 
     ros::spin();
     return 0;
