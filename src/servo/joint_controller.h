@@ -3,6 +3,7 @@
 
 #include <memory>
 
+#include <hexapod_msgs/HeadJoints.h>
 #include <hexapod_msgs/LegsJoints.h>
 
 #include "servo_controller.h"
