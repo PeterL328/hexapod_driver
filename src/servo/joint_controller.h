@@ -15,8 +15,9 @@ public:
     /// Updates the all the leg joints.
     /// \param legs_joints A reference to the LegJoints message.
     void legs_state_update_callback(const hexapod_msgs::LegsJoints::ConstPtr &legs_joints);
+
     /// Update the head joints
-    /// \param head_joins: reference to the HeadJoints message.
+    /// \param head_joints: reference to the HeadJoints message.
     void head_state_update_callback(const hexapod_msgs::HeadJoints::ConstPrt &head_joins);
 
 private:

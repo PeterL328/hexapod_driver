@@ -84,7 +84,7 @@ int main(int argc, char **argv)
 {
     const std::string node_name = "joint_controller";
     const std::string joints_command_topic_name = "joints_command";
-    const std::string head_command_topic_name = "head_command";
+    const std::string head_joints_command_topic_name = "head_joints_command";
 
     ros::init(argc, argv, node_name);
     ros::NodeHandle n("~");

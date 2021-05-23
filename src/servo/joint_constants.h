@@ -33,8 +33,8 @@ constexpr uint8_t RB_FEMUR_CH        = 8;
 constexpr uint8_t RB_TIBIA_CH        = 31;
 
 // Head
-constexpr uint8_t H_UD_CH         = 0;
-constexpr uint8_t H_LR_CH         = 1;
+constexpr uint8_t HEAD_UPDOWN_CH         = 0;
+constexpr uint8_t HEAD_LEFTRIGHT_CH         = 1;
 
 // Joint offsets. Unit in degrees
 // Left front leg
