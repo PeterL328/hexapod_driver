@@ -22,5 +22,6 @@ public:
 
 private:
     std::unique_ptr<Servo::ServoController> servo_controller;
+    float preprocess(float angle_deg, bool rotation_dir, float offset_deg);
 };
 #endif //JOINT_CONTROLLER_H
