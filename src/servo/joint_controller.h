@@ -19,7 +19,7 @@ public:
 
     /// Update the head joints
     /// \param head_joints: reference to the HeadJoints message.
-    void head_state_update_callback(const hexapod_msgs::HeadJoints::ConstPrt &head_joints);
+    void head_state_update_callback(const hexapod_msgs::HeadJoints::ConstPtr &head_joints);
 
 private:
     std::unique_ptr<Servo::ServoController> servo_controller;
