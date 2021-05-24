@@ -68,7 +68,7 @@ constexpr float RB_FEMUR_OFFSET      = 7.0f;
 constexpr float RB_TIBIA_OFFSET      = -8.0f;
 
 // Head
-constexpr float H_UPDOWN_OFFSET      = 0.0f;
+constexpr float H_UPDOWN_OFFSET      = 7.0f;
 constexpr float H_LEFTRIGHT_OFFSET   = 0.0f;
 
 // Direction of the rotation for the servo
