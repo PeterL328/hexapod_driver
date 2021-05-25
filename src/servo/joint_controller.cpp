@@ -13,27 +13,6 @@ JointController::JointController() {
 }
 
 void JointController::legs_state_update_callback(const hexapod_msgs::LegsJoints::ConstPtr &legs_joints) {
-    auto rad_2_deg = [](float radian){
-        return radian * (180.f / M_PI);
-    };
-
-    // Preprocess the joint angle
-    // The angles that we are receiving are in radians
-    // We need to convert from [-1.5708 rad, +1.5708 rad] -> [0 deg, 180 deg]
-    auto preprocess = [&rad_2_deg](float angle_rad, bool rotation_dir, float offset_deg){
-        // 1) Convert from rad to degrees
-        float angle_deg = rad_2_deg(angle_rad);
-        // 2) Shift so [-90, 90] -> [0, 180]
-        angle_deg += 90.f;
-        // 3) Rotate if needed.
-        if (!rotation_dir) {
-            angle_deg = 180.f - angle_deg;
-        }
-        // 4) Apply offsets.
-        angle_deg += offset_deg;
-        return angle_deg;
-    };
-
     // Left front leg
     servo_controller->set_angle(LF_COXA_CH, preprocess(legs_joints->left_front_leg.coxa, LF_COXA_DIR, LF_COXA_OFFSET));
     servo_controller->set_angle(LF_FEMUR_CH, preprocess(legs_joints->left_front_leg.femur, LF_FEMUR_DIR, LF_FEMUR_OFFSET));
@@ -65,10 +44,33 @@ void JointController::legs_state_update_callback(const hexapod_msgs::LegsJoints:
     servo_controller->set_angle(RB_TIBIA_CH, preprocess(legs_joints->right_back_leg.tibia, RB_TIBIA_DIR, RB_TIBIA_OFFSET));
 }
 
+void JointController::head_state_update_callback(const hexapod_msgs::HeadJoints::ConstPtr &head_joints) {
+    servo_controller->set_angle(HEAD_UPDOWN_CH, preprocess(head_joints->up_down, HEAD_UPDOWN_DIR, HEAD_UPDOWN_OFFSET));
+    servo_controller->set_angle(HEAD_LEFTRIGHT_CH, preprocess(head_joints->left_right, HEAD_LEFTRIGHT_DIR, HEAD_LEFTRIGHT_OFFSET));
+}
+
+float JointController::preprocess(float angle_rad, bool rotation_dir, float offset_deg){
+    // Preprocess the joint angle
+    // The angles that we are receiving are in radians
+    // We need to convert from [-1.5708 rad, +1.5708 rad] -> [0 deg, 180 deg]
+    // 1) Convert from rad to degrees
+    float angle_deg = angle_rad * (180.f / M_PI);
+    // 2) Shift so [-90, 90] -> [0, 180]
+    angle_deg += 90.f;
+    // 3) Rotate if needed.
+    if (!rotation_dir) {
+        angle_deg = 180.f - angle_deg;
+    }
+    // 4) Apply offsets.
+    angle_deg += offset_deg;
+    return angle_deg;
+}
+
 int main(int argc, char **argv)
 {
     const std::string node_name = "joint_controller";
     const std::string joints_command_topic_name = "joints_command";
+    const std::string head_joints_command_topic_name = "head_joints_command";
 
     ros::init(argc, argv, node_name);
     ros::NodeHandle n("~");
@@ -76,7 +78,8 @@ int main(int argc, char **argv)
     // Setup servo controller object
     JointController joint_controller{};
 
-    ros::Subscriber sub = n.subscribe(joints_command_topic_name, 1, &JointController::legs_state_update_callback, &joint_controller);
+    ros::Subscriber joints_sub = n.subscribe(joints_command_topic_name, 1, &JointController::legs_state_update_callback, &joint_controller);
+    ros::Subscriber head_joints_sub = n.subscribe(head_joints_command_topic_name, 1, &JointController::head_state_update_callback, &joint_controller);
 
     ros::spin();
     return 0;
