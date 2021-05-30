@@ -15,7 +15,7 @@ int main(int argc, char **argv)
     // Get values from arguments
     float publish_rate_in_hz;
     n.param("publish_rate", publish_rate_in_hz, 1.0f);
-    ROS_INFO("Publishing at %fHz.", publish_rate_in_hz);
+    ROS_INFO("Publishing at %fHz on %s.", publish_rate_in_hz, battery_level_topic_name.c_str());
 
     ros::Publisher battery_level_pub = n.advertise<sensor_msgs::BatteryState>(battery_level_topic_name, 1000);
     ros::Rate loop_rate(publish_rate_in_hz);
