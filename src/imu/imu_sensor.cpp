@@ -5,9 +5,9 @@
 namespace Imu {
     ImuSensor::ImuSensor() {
         // Setup the MPU5060 object
-        MPU5060_controller = std::make_unique<MPU5060>();
+        MPU5060_controller_ = std::make_unique<MPU5060>();
         // Attempt connection with the I2C device (MPU5060)
-        int status_code = MPU5060_controller->connect();
+        int status_code = MPU5060_controller_->connect();
         if (status_code == -1) {
             ROS_ERROR("Failed to connect to MPU5060 via I2C.");
             throw std::runtime_error("Failed to connect to MPU5060 via I2C.");
@@ -16,10 +16,10 @@ namespace Imu {
     }
 
     std::array<float, 3> ImuSensor::read_linear_acceleration() const {
-        return MPU5060_controller->read_linear_acceleration();
+        return MPU5060_controller_->read_linear_acceleration();
     }
 
     std::array<float, 3> ImuSensor::read_angular_velocity() const {
-        return MPU5060_controller->read_angular_velocity();
+        return MPU5060_controller_->read_angular_velocity();
     }
 }

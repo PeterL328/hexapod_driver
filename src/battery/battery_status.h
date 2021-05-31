@@ -25,7 +25,7 @@ namespace Battery {
         std::pair<float, float> read_battery_percentage(BatteryType battery) const;
 
     private:
-        std::unique_ptr<ADS7830> ADS7830_controller;
+        std::unique_ptr<ADS7830> ADS7830_controller_;
         float lower_bound_;
         float upper_bound_;
     };
