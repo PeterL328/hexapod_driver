@@ -1,8 +1,6 @@
 #ifndef IMU_SENSOR_H
 #define IMU_SENSOR_H
 
-#include <memory>
-
 #include "mpu5060.h"
 
 namespace Imu {
@@ -20,7 +18,7 @@ namespace Imu {
         std::array<float, 3> read_angular_velocity() const;
 
     private:
-        std::unique_ptr<MPU5060> MPU5060_controller_;
+        MPU5060 MPU5060_controller_;
     };
 }
 #endif //IMU_SENSOR_H

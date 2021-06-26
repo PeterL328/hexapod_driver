@@ -1,8 +1,6 @@
 #ifndef JOINT_CONTROLLER_H
 #define JOINT_CONTROLLER_H
 
-#include <memory>
-
 #include <hexapod_msgs/HeadJoints.h>
 #include <hexapod_msgs/LegsJoints.h>
 
@@ -22,7 +20,7 @@ public:
     void head_state_update_callback(const hexapod_msgs::HeadJoints::ConstPtr &head_joints);
 
 private:
-    std::unique_ptr<Servo::ServoController> servo_controller_;
+    Servo::ServoController servo_controller_;
     float preprocess(float angle_deg, bool rotation_dir, float offset_deg);
 };
 #endif //JOINT_CONTROLLER_H

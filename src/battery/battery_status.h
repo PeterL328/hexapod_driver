@@ -1,8 +1,6 @@
 #ifndef BATTERY_STATUS_H
 #define BATTERY_STATUS_H
 
-#include <memory>
-
 #include "ads7830.h"
 
 namespace Battery {
@@ -25,7 +23,7 @@ namespace Battery {
         std::pair<float, float> read_battery_percentage(BatteryType battery) const;
 
     private:
-        std::unique_ptr<ADS7830> ADS7830_controller_;
+        ADS7830 ADS7830_controller_;
         float lower_bound_;
         float upper_bound_;
     };
