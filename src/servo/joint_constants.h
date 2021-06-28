@@ -59,8 +59,8 @@ constexpr float RF_TIBIA_OFFSET      = 12.5f;
 
 // Right middle leg
 constexpr float RM_COXA_OFFSET       = 8.0f;
-constexpr float RM_FEMUR_OFFSET      = -12.0f;
-constexpr float RM_TIBIA_OFFSET      = -3.0f;
+constexpr float RM_FEMUR_OFFSET      = -10.0f;
+constexpr float RM_TIBIA_OFFSET      = -4.0f;
 
 // Right back leg
 constexpr float RB_COXA_OFFSET       = 9.0f;
